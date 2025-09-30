@@ -1,0 +1,55 @@
+name: Deploy Tandem app
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd webapps/helpbob/
+
+            npx pm2 delete helpbob || true
+            
+            # Pull latest code
+            git pull origin main
+
+            # Install dependencies & rebuild
+            npm install
+            npm run build
+
+            # PM2 Prozess starten oder neu starten
+            npx pm2 describe helpbob > /dev/null 2>&1
+
+            if [ $? -eq 0 ]; then
+              npx pm2 restart helpbob --restart-delay=5000
+            else
+              npx pm2 start npm --name "helpbob" --restart-delay 5000 -- run start -- -p 3006
+            fi
+
+            # PM2 Prozessliste speichern
+            npx pm2 startup systemd -u $USER --hp $HOME
+            npx pm2 save
