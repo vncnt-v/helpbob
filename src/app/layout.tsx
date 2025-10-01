@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "@/styles/globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Preview from "@/components/layout/Preview";
 
 const inriaSans = localFont({
   src: [
@@ -12,12 +13,12 @@ const inriaSans = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/InriaSansLight.otf",
+      path: "../../public/fonts/InriaSans-Light.ttf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../public/fonts/InriaSansBold.otf",
+      path: "../../public/fonts/InriaSans-Bold.ttf",
       weight: "700",
       style: "normal",
     },
@@ -27,12 +28,12 @@ const inriaSans = localFont({
       style: "italic",
     },
     {
-      path: "../../public/fonts/InriaSansLightItalic.otf",
+      path: "../../public/fonts/InriaSans-LightItalic.ttf",
       weight: "300",
       style: "italic",
     },
     {
-      path: "../../public/fonts/InriaSansBoldItalic.otf",
+      path: "../../public/fonts/InriaSans-BoldItalic.ttf",
       weight: "700",
       style: "italic",
     }
@@ -55,25 +56,6 @@ const dinBlack = localFont({
 export const metadata: Metadata = {
   title: "Help Bob",
   description: "",
-  themeColor: "#FBCB03",
-  appleWebApp: {
-    capable: true,
-    title: "Help Bob",
-    statusBarStyle: "default",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", type: "image/x-icon" },
-      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-    other: [
-      { rel: "manifest", url: "/site.webmanifest" },
-    ],
-  },
 };
 
 export default function RootLayout({
@@ -85,6 +67,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inriaSans.variable} ${dinBlack.variable} antialiased`}>
         <Header/>
+        {/* <Preview/> */}
           {children}
         <Footer />
       </body>

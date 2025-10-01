@@ -1,0 +1,9 @@
+.primary-btn {
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: clamp(16px, 1.2vw, 23px);
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 0.7vw 2.9vw;
+    box-shadow: 6px 6px 0 #0000001a;
+}

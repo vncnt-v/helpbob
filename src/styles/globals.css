@@ -13,7 +13,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --inria-sans: var(--inria-sans);
+  --font-sans: var(--inria-sans);
   --font-heading: var(--din-black);
 }
 
@@ -24,10 +24,28 @@
   }
 }
 
+html {
+  font-size: clamp(16px, 1.2vw, 23px);
+}
+
+.text-sm {
+  font-size: clamp(13px, 1vw, 19px);
+}
+
+.text-main-headline {
+  font-size: clamp(20px, 8.8vw, 162px);
+}
+
+.text-headline {
+  font-size: clamp(18px, 3.5vw, 60px);
+  line-height: 1!important;
+}
+
 body {
-  @apply inria-sans;
+  @apply font-sans;
   background: var(--background);
   color: var(--foreground);
+  font-size: 1rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -36,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .din-black {
-  @apply font-heading;
+  font-family: var(--din-black);
 }
 
 .bg-primary {
@@ -47,13 +65,21 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-foreground);
 }
 
-.max-width {
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .min-h-screen {
   min-height: 100vh;
   min-height: 100lvh;
+}
+
+.text-white {
+  color: #FFFFFF!important;
+}
+
+.yellow-gradient {
+  background: linear-gradient(
+    to bottom,
+    #FEE934 0%,
+    #FDD816 63%,
+    #FEDC19 64%,
+    #FCCB05 100%
+  );
 }
